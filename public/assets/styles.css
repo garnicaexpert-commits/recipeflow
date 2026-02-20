@@ -1,0 +1,47 @@
+body{margin:0;font-family:Arial,sans-serif;background:#f2f4f8;color:#1f2937}
+.center{min-height:100vh;display:grid;place-items:center}
+.card{background:#fff;border-radius:12px;padding:1rem;box-shadow:0 4px 15px #0002}
+.stack{display:grid;gap:.6rem}
+input,select{padding:.6rem;border:1px solid #cbd5e1;border-radius:8px}
+button,.btn-link{padding:.6rem .9rem;border:0;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;cursor:pointer}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:#fff;box-shadow:0 2px 8px #0001}
+.container{padding:1.2rem 2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem}
+.msg{color:#b91c1c}
+
+.form-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.6rem}
+.recipe-table{width:100%;border-collapse:collapse;background:#fff}
+.recipe-table th,.recipe-table td{border:1px solid #dbe2ea;padding:.4rem}
+.actions-row{display:flex;gap:.6rem;flex-wrap:wrap}
+.btn-secondary{background:#475569;color:#fff}
+.btn-danger{background:#b91c1c;color:#fff;border:0;border-radius:8px;padding:.4rem .65rem;cursor:pointer}
+
+
+.topbar-actions{display:flex;align-items:center;gap:.7rem}
+.module-highlight{margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;gap:.8rem;flex-wrap:wrap}
+.module-highlight h4,.module-highlight p{margin:.1rem 0}
+
+.search-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.8rem}
+.search-row input{flex:1;min-width:220px}
+.history-list{display:grid;gap:.7rem}
+.history-item{padding:.85rem}
+
+.history-horizontal{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.history-content{flex:1;min-width:240px}
+.history-action{display:flex;align-items:center}
+
+.recipe-sheet-two-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.recipe-col{background:#fff;border:1px dashed #444;border-radius:10px;padding:12px;min-height:60vh}
+.recipe-col h3,.recipe-col h4{margin:.2rem 0 .4rem}
+.recipe-col ul{margin:.2rem 0 0;padding-left:18px}
+
+@media print{
+  @page{size:A4 landscape;margin:12mm}
+  .no-print{display:none !important}
+  body{background:#fff}
+  .container{padding:0}
+  .recipe-col{min-height:180mm;box-shadow:none}
+}
+
+.ok{color:#166534}
+.actions-row form{margin:0}

@@ -1,0 +1,46 @@
+# =========================
+# Archivos del sistema
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Configuración local
+# =========================
+.env
+.env.local
+config.local.php
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+xampp-error.log
+
+# =========================
+# Archivos temporales
+# =========================
+tmp/
+cache/
+*.tmp
+
+# =========================
+# Archivos de IDE
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Archivos de base de datos
+# =========================
+*.sql
+*.sqlite
+*.db
+
+# =========================
+# Archivos de respaldo
+# =========================
+*.bak
+*.zip
+*.rar
