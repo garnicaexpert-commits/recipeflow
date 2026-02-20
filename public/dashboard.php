@@ -21,12 +21,13 @@ try {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Dashboard MediSys</title>
+  <title>Recipeflow</title>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
   <header class="topbar">
-    <h2>Dashboard</h2>
+    <h1 style="text-align: center;">RECIPERFLOW</h1>
+    <h2>Sistena de Control de Recetas Medicas</h2>
     <div class="topbar-actions">
       <span><?= htmlspecialchars($_SESSION['user']['display_name'] ?? $_SESSION['user']['full_name']) ?></span>
       <a class="btn-link" href="logout.php">Salir</a>
