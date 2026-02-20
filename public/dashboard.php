@@ -4,11 +4,13 @@ if (!isset($_SESSION['user'])) {
   header('Location: index.php');
   exit;
 }
+
 require __DIR__ . '/../app/Database.php';
 $config = require __DIR__ . '/../config/config.php';
 $modules = [];
 $error = '';
 $isSuper = (($_SESSION['user']['access_level'] ?? 'usuario') === 'superusuario');
+
 try {
   $pdo = Database::connect($config['db']);
   $modules = $pdo->query('SELECT name, description, ruta FROM modules ORDER BY id')->fetchAll();
@@ -21,45 +23,25 @@ try {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Recipeflow</title>
+  <title>Dashboard MediSys</title>
+  <title>RecipeFlow Dashboard</title>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
   <header class="topbar">
-    <h1 style="text-align: center;">RECIPERFLOW</h1>
-    <h2>Sistena de Control de Recetas Medicas</h2>
+    <h2>Dashboard</h2>
+    <div>
+      <h2>Dashboard</h2>
+    </div>
     <div class="topbar-actions">
       <span><?= htmlspecialchars($_SESSION['user']['display_name'] ?? $_SESSION['user']['full_name']) ?></span>
       <a class="btn-link" href="logout.php">Salir</a>
     </div>
   </header>
+
   <main class="container">
     <h3>Módulos del sistema</h3>
-<!--
-    <section class="card module-highlight">
-      <div>
-        <h4>Recetas</h4>
-        <p>Crear, guardar e imprimir recetas médicas.</p>
-      </div>
-      <a class="btn-link" href="recetas.php">Recetas</a>
-    </section>
 
-    <section class="card module-highlight">
-      <div>
-        <h4>Historial de recetas</h4>
-        <p>Ver y visualizar recetas almacenadas, con búsqueda por paciente.</p>
-      </div>
-      <a class="btn-link" href="historial.php">Historial</a>
-    </section>
-
-    <section class="card module-highlight">
-      <div>
-        <h4>Vademécum</h4>
-        <p>CRUD de medicamentos: nombre comercial, componente químico, dosis y presentación.</p>
-      </div>
-      <a class="btn-link" href="vademecum.php">Vademécum</a>
-    </section>
--->
     <?php if ($isSuper): ?>
     <section class="card module-highlight">
       <div>
@@ -77,11 +59,13 @@ try {
     <section class="grid">
       <?php foreach ($modules as $m): ?>
         <article class="card">
+        <article class="card module-card">
           <h4><?= htmlspecialchars($m['name']) ?></h4>
         <a class="btn-link" href=<?=htmlspecialchars($m['ruta'])?>><?= htmlspecialchars($m['name']) ?></a>
 
           <p><?= htmlspecialchars($m['description']) ?></p>
-        </article>
+    <!--      <a class="btn-link" href="<?= htmlspecialchars($m['ruta']) ?>">Abrir módulo</a>-->
+        </article></article>
       <?php endforeach; ?>
     </section>
   </main>
