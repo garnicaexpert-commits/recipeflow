@@ -40,8 +40,9 @@ try {
 </head>
 <body>
   <header class="topbar">
+    <h2>RecipeFlow</h2>
     <div>
-      <h2>Dashboard</h2>
+      <h2>Sistema de Control de Recetas Medicas</h2>
     </div>
     <div class="topbar-actions">
       <span><?= htmlspecialchars($_SESSION['user']['display_name'] ?? $_SESSION['user']['full_name']) ?></span>
