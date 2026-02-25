@@ -28,13 +28,13 @@ function addRow(data = { medicine_id: 0, quantity: 1, name: '', dose: '', instru
   const medName = data.name || (byId.get(Number(data.medicine_id))?.nombre_comercial ?? '');
 
   tr.innerHTML = `
-    <td>
-      <input class="m-search" list="medicamentos-list" value="${medName}" placeholder="Escriba para buscar" required>
+    <td class="Container" style="display: flex">
+      <input class="m-search" list="medicamentos-list" value="${medName}" placeholder="Escriba para buscar" required style="width :500px">
       <input type="hidden" class="m-id" value="${data.medicine_id || 0}">
     </td>
-    <td><input value="${data.quantity || 1}" type="number" min="1" class="m-qty" required></td>
-    <td><input value="${data.dose || ''}" class="m-dose" required></td>
-    <td><input value="${data.instructions || ''}" class="m-inst" required></td>
+    <td><input value="${data.quantity || 1}" type="number" min="1" class="m-qty" required  style="width :80px"></td>
+    <td><input value="${data.dose || ''}" class="m-dose" required  style="width :200px"></td>
+    <td><input value="${data.instructions || ''}" class="m-inst" required  style="width :320px"></td>
     <td><button type="button" class="btn-danger">Quitar</button></td>
   `;
 

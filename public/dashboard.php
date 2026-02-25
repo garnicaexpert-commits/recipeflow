@@ -10,6 +10,7 @@ $config = require __DIR__ . '/../config/config.php';
 $modules = [];
 $error = '';
 $isSuper = (($_SESSION['user']['access_level'] ?? 'usuario') === 'superusuario');
+
 $hasUsersModule = false;
 
 try {
@@ -35,14 +36,15 @@ try {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>RecipeFlow Dashboard</title>
+  <title>RecipeFlow Inicio</title>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
   <header class="topbar">
-    <h2>RecipeFlow</h2>
-    <div>
-      <h2>Sistema de Control de Recetas Medicas</h2>
+    <div style="display: flex;">
+      <img src="../imagen/logobig.png" style="width: 80px; height: 80px;">
+      <h1>Sistema de Control de Recetas Médicas</h1>
+      
     </div>
     <div class="topbar-actions">
       <span><?= htmlspecialchars($_SESSION['user']['display_name'] ?? $_SESSION['user']['full_name']) ?></span>
@@ -50,11 +52,20 @@ try {
     </div>
   </header>
   <main class="container">
-    <section class="dashboard-hero card">
-      <h1>RecipeFlow</h1>
-      <p>Sistema de Control de Recipes</p>
+     <!-- <h2>Panel principal</h2> -->
+    <section class="card " >
+      <!--<p class="eyebrow">Sistema de Control de Recipes</p> -->
+      <p style="text-align:center;">Gestion de Prescipciones Medicas, historial de recetas Madicas y módulos operativos con una experiencia simple y profesional.</p>
     </section>
+
     <h3>Módulos del sistema</h3>
+
+    
+
+    <?php if ($error): ?>
+      <p class="msg"><?= htmlspecialchars($error) ?></p>
+    <?php endif; ?>
+
     <section class="grid">
       <?php foreach ($modules as $m): ?> 
         <?php 
@@ -63,8 +74,8 @@ try {
         // 2. Si el nombre ES 'Usuarios', solo se muestra si $isSuper es true.
         if ($m['name'] !== 'Usuarios' || ($m['name'] === 'Usuarios' && $isSuper)): 
         ?>
-          <article class="card module-card">
-              <h4><?= htmlspecialchars($m['name']) ?></h4>
+          <article class="card module-card" style="text-align:center;">
+              <h4 ><?= htmlspecialchars($m['name']) ?></h4>
               <p><?= htmlspecialchars($m['description']) ?></p>
               <a class="btn-link" href="<?= htmlspecialchars($m['ruta']) ?>">Abrir módulo</a>
           </article>

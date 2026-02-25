@@ -21,12 +21,19 @@ try {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Módulo de Recetas</title>
+  <title>RecipeFlow - Recetas</title>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
   <header class="topbar">
+    <div style="display: flex;" >
+      
+    <img src="../imagen/logobig.png" style="width: 80px; height: 80px;">
     <h2>Módulo de Recetas</h2>
+    </div>
+    <div>
+      
+    </div>
     <a class="btn-link" href="dashboard.php">Regresar al dashboard</a>
   </header>
 
@@ -35,24 +42,29 @@ try {
       <?php if ($err): ?><p class="msg"><?= htmlspecialchars($err) ?></p><?php endif; ?>
 
       <form id="recipe-form" class="stack">
-        <div class="grid form-grid">
-          <input name="patient_name" placeholder="Nombres y apellidos" required>
-          <input name="cedula" placeholder="Cédula" required>
-          <input name="age" type="number" min="0" placeholder="Edad" required>
-          <input name="address" placeholder="Dirección" required>
-          <input name="phone" placeholder="Teléfono" required>
-          <input name="diagnosis" placeholder="Diagnóstico" required>
-          <input name="cie10" placeholder="Código CIE-10" required>
+        <div class="grid inline-grid" style="display: flex;">
+          <input name="patient_name" placeholder="Nombres y apellidos" required style="width: 800px;">
+          <input name="cedula" placeholder="Cédula" required style="width: 300px;">
+          <input name="age" type="number" min="0" placeholder="Edad" required style="width: 117px;">
+         </div>
+         <div class="grid inline-grid" style="display: flex;">  
+          <input name="address" placeholder="Dirección" required style="width: 800px">
+          <input name="phone" placeholder="Teléfono" required style="width: 435px">
+         </div>
+         <div  class="grid inline-grid" style="display: flex;">
+          <input name="diagnosis" placeholder="Diagnóstico" required style="width: 934px">
+          <input name="cie10" placeholder="Código CIE-10" required style="width: 300px">     
+         </div>
         </div>
 
         <h4>Medicamentos</h4>
         <table class="recipe-table" id="med-table">
           <thead>
             <tr>
-              <th>Medicamento (búsqueda progresiva)</th>
+              <th>Medicamento (Búsqueda Progresiva)</th>
               <th>Cantidad</th>
-              <th>Dosis</th>
               <th>Indicaciones</th>
+              <th>Observaciones</th>
               <th></th>
             </tr>
           </thead>
@@ -61,8 +73,8 @@ try {
         <button type="button" id="add-med" class="btn-secondary">+ Agregar medicamento</button>
 
         <div class="actions-row">
-          <button type="submit">Guardar receta</button>
-          <button type="button" id="print-btn">Imprimir receta PDF</button>
+          <button type="submit" id="print-btn">Guardar receta</button>
+          <!-- <button type="button" id="print-btn">Imprimir receta PDF</button> -->
         </div>
       </form>
       <p id="msg" class="msg"></p>
