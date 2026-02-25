@@ -13,6 +13,8 @@ $recipe = null;
 $items = [];
 $error = '';
 
+$autoPrint = (($_GET['autoprint'] ?? '0') === '1');
+
 try {
   $pdo = Database::connect($config['db']);
   Database::ensureUsersSchema($pdo);
@@ -88,5 +90,11 @@ try {
       </section>
     <?php endif; ?>
   </main>
+
+  <?php if ($autoPrint && !$error && $recipe): ?>
+    <script>
+      window.addEventListener('load', () => window.print());
+    </script>
+  <?php endif; ?>
 </body>
 </html>

@@ -169,8 +169,17 @@ form.addEventListener('submit', async (e) => {
       msg.textContent = data.message || 'No se pudo guardar';
       return;
     }
-    lastRecipe = recipe;
-    msg.textContent = `Receta #${data.id} guardada correctamente.`;
+    const recipeUrl = `historial_detalle.php?id=${encodeURIComponent(data.id)}&autoprint=1`;
+    const printTab = window.open(recipeUrl, '_blank', 'noopener');
+
+    form.reset();
+    medBody.innerHTML = '';
+    addRow();
+    lastRecipe = null;
+
+    msg.textContent = printTab
+      ? `Receta #${data.id} guardada correctamente. Se abrió la vista para PDF.`
+      : `Receta #${data.id} guardada correctamente. Habilita ventanas emergentes para abrir el PDF automáticamente.`;
   } catch {
     msg.textContent = 'Error de conexión.';
   }
