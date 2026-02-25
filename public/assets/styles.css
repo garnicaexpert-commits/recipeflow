@@ -72,7 +72,7 @@ button:hover,.btn-link:hover{background:var(--primary-strong);transform:translat
 
 .search-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.8rem}
 .search-row input{flex:1;min-width:220px}
-.history-list{display:grid;gap:.7rem}
+.history-list{display:grid; gap:.7rem}
 .history-item{padding:.85rem}
 .history-item{padding:.9rem}
 

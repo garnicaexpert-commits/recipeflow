@@ -6,7 +6,8 @@ const printBtn = document.getElementById('print-btn');
 const datalist = document.getElementById('medicamentos-list');
 const vademecum = Array.isArray(window.VADEMECUM_DATA) ? window.VADEMECUM_DATA : [];
 const byId = new Map(vademecum.map((m) => [Number(m.id), m]));
-let lastRecipe = null;
+let lastRecipeId = 0;
+
 
 function fillDatalist() {
   if (!datalist) return;
@@ -93,49 +94,6 @@ function getRecipeData() {
   };
 }
 
-function printRecipe(recipe) {
-  const w = window.open('', '_blank');
-  const left = recipe.medications
-    .map((m) => `<li><b>${m.name}</b> x ${m.quantity} - ${m.dose}<br><small>${m.presentacion}</small></li>`)
-    .join('');
-  const right = recipe.medications
-    .map((m) => `<li><b>${m.name}</b> x ${m.quantity}: ${m.instructions}</li>`)
-    .join('');
-
-  w.document.write(`
-    <html><head><title>Receta</title>
-    <style>
-      @page { size: A4 landscape; margin: 12mm; }
-      body { font-family: Arial; }
-      .sheet { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-      .col { border:1px dashed #333; padding:10px; min-height:180mm; }
-      h3,h4{margin:6px 0}
-      ul{padding-left:18px}
-    </style></head><body>
-      <div class="sheet">
-        <section class="col">
-          <h3>Receta Médica</h3>
-          <p><b>Paciente:</b> ${recipe.patient_name} | <b>Cédula:</b> ${recipe.cedula}</p>
-          <p><b>Edad:</b> ${recipe.age} | <b>Tel:</b> ${recipe.phone}</p>
-          <p><b>Dirección:</b> ${recipe.address}</p>
-          <p><b>Diagnóstico:</b> ${recipe.diagnosis} | <b>CIE-10:</b> ${recipe.cie10}</p>
-          <h4>Medicamentos</h4><ul>${left}</ul>
-        </section>
-        <section class="col">
-          <h3>Receta Médica</h3>
-          <p><b>Paciente:</b> ${recipe.patient_name} | <b>Cédula:</b> ${recipe.cedula}</p>
-          <p><b>Edad:</b> ${recipe.age} | <b>Tel:</b> ${recipe.phone}</p>
-          <p><b>Dirección:</b> ${recipe.address}</p>
-          <p><b>Diagnóstico:</b> ${recipe.diagnosis} | <b>CIE-10:</b> ${recipe.cie10}</p>
-          <h4>Indicaciones</h4><ul>${right}</ul>
-        </section>
-      </div>
-    </body></html>
-  `);
-  w.document.close();
-  w.focus();
-  w.print();
-}
 
 addBtn.addEventListener('click', () => addRow());
 printBtn.addEventListener('click', () => {
@@ -143,7 +101,7 @@ printBtn.addEventListener('click', () => {
     msg.textContent = 'Primero guarda una receta para imprimir.';
     return;
   }
-  printRecipe(lastRecipe);
+  window.open(`receta_pdf.php?id=${encodeURIComponent(lastRecipeId)}&autoprint=0`, '_blank', 'noopener');
 });
 
 form.addEventListener('submit', async (e) => {
@@ -169,13 +127,13 @@ form.addEventListener('submit', async (e) => {
       msg.textContent = data.message || 'No se pudo guardar';
       return;
     }
-    const recipeUrl = `historial_detalle.php?id=${encodeURIComponent(data.id)}&autoprint=1`;
+    const recipeUrl = `historial_detalle.php?id=${encodeURIComponent(data.id)}&autoprint=0`;
     const printTab = window.open(recipeUrl, '_blank', 'noopener');
 
     form.reset();
     medBody.innerHTML = '';
     addRow();
-    lastRecipe = null;
+    lastRecipeId = Number(data.id) || 0;
 
     msg.textContent = printTab
       ? `Receta #${data.id} guardada correctamente. Se abrió la vista para PDF.`

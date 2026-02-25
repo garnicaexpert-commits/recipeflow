@@ -42,9 +42,14 @@ try {
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
+</head>
+<body>
   <header class="topbar">
-    <h2>Historial de Recetas</h2>
-    <a class="btn-link" href="dashboard.php">Regresar al dashboard</a>
+    <div style="display: flex;" >
+      <img src="../imagen/logobig.png" style="width: 80px; height: 80px;">
+      <h2>Módulo de Recetas</h2>
+    </div>
+    <a class="btn-link" href="dashboard.php">Regresar al Dashboard</a>
   </header>
 
   <main class="container">
@@ -66,10 +71,11 @@ try {
         <?php foreach ($list as $r): ?>
           <article class="card history-item history-horizontal">
             <div class="history-content">
-              <h4><?= htmlspecialchars($r['patient_name']) ?></h4>
-              <p><b>Cédula:</b> <?= htmlspecialchars($r['cedula']) ?> | <b>CIE-10:</b> <?= htmlspecialchars($r['cie10']) ?></p>
-              <p><b>Diagnóstico:</b> <?= htmlspecialchars($r['diagnosis']) ?></p>
-              <small><?= htmlspecialchars($r['created_at']) ?></small>
+              <p>
+              <b><?= htmlspecialchars($r['patient_name']) ?></b> |  <b>Cédula:</b> <?= htmlspecialchars($r['cedula']) ?> 
+              <b>Diagnóstico:</b> <?= htmlspecialchars($r['diagnosis']) ?>  | <b>CIE-10:</b> <?= htmlspecialchars($r['cie10']) ?>
+              <small> |  De Fecha: <?= htmlspecialchars($r['created_at']) ?></small>
+            </p> 
             </div>
             <div class="history-action">
               <a class="btn-link" href="historial_detalle.php?id=<?= (int)$r['id'] ?>" target="_blank" rel="noopener">Visualizar</a>
@@ -81,3 +87,4 @@ try {
   </main>
 </body>
 </html>
+ 
