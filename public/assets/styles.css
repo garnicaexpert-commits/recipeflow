@@ -107,3 +107,32 @@ button:hover,.btn-link:hover{background:var(--primary-strong);transform:translat
 .login-brand h1{margin:.45rem 0 .2rem;color:#12323a;font-size:2rem;line-height:1.2;letter-spacing:.1px}
 .login-brand p{margin:.35rem 0 0;color:var(--muted)}
 .muted{color:var(--muted)}
+
+
+/* Estilos necesarios para el alineamiento */
+.user-profile {
+    display: flex;
+    flex-direction: column; /* Apila los bloques uno debajo del otro */
+    gap: 5px;               /* Espacio pequeño entre el nombre y la especialidad */
+}
+
+.user-header {
+    display: flex;
+    align-items: center;    /* Centra verticalmente logo y texto */
+    gap: 15px;              /* Espacio entre logo y nombre */
+}
+
+.topbar-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Ajustes de margen para que no se vean muy separados */
+.user-header h1, .user-specialty h3 {
+    margin: 0;
+}
+
+.user-specialty {
+    padding-left: 95px; /* (Ancho logo 80px + gap 15px) para alinear el texto con el nombre */
+}

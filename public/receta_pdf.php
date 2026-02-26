@@ -60,6 +60,28 @@ try {
     <?php if ($error): ?>
       <p class="msg"><?= htmlspecialchars($error) ?></p>
     <?php elseif ($recipe): ?>
+      </head>
+<body>
+  <header class="topbar">
+    <div  class="container">
+      <div class="user-profile" >
+        <div class="user-header">
+          <img src="../imagen/logobig.png" style="width: 80px; height: 80px;">
+          <h1><?= htmlspecialchars($_SESSION['user']['display_name'] ?? $_SESSION['user']['full_name']) ?></span></h1>
+        </div>
+        <div class="user-specialty">
+          <h3><?= htmlspecialchars($_SESSION['user']['specialty'] ?? $_SESSION['user']['specialty']) ?></span></h3>
+        </div>
+        <div class="user-header">
+          <img src="../imagen/logobig.png" style="width: 80px; height: 80px;">
+          <h1><?= htmlspecialchars($_SESSION['user']['display_name'] ?? $_SESSION['user']['full_name']) ?></span></h1>
+        </div>
+        <div class="user-specialty">
+          <h3><?= htmlspecialchars($_SESSION['user']['specialty'] ?? $_SESSION['user']['specialty']) ?></span></h3>
+        </div>
+      </div>
+    </div>
+  </header>
       <section class="recipe-sheet-two-cols">
         <article class="recipe-col">
           <h3>Receta Médica</h3>
