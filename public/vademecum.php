@@ -115,12 +115,22 @@ try {
     </section>
 
     <section class="card" style="margin-top:1rem;">
-      <h3>Listado de medicamentos</h3>
-      <?php if (!$list): ?>
-        <p>Sin registros en vademécum.</p>
-      <?php endif; ?>
+     <!-- busqueda progresiva -->
+<section class="card" style="margin-top:1rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <h3>Listado de medicamentos</h3>
+    <input type="text" id="busquedaVademecum" placeholder="🔍 Buscar por nombre o componente..." 
+           style="width: 300px; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+  </div>
+  
+  <?php if (!$list): ?>
+    <p>Sin registros en vademécum.</p>
+  <?php endif; ?>
+
+
 
       <div class="history-list">
+
         <?php foreach ($list as $row): ?>
           <article class="card history-item history-horizontal">
             <div class="history-content">
@@ -142,4 +152,27 @@ try {
     </section>
   </main>
 </body>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const inputBusqueda = document.getElementById('busquedaVademecum');
+    const items = document.querySelectorAll('.history-item');
+
+    inputBusqueda.addEventListener('input', function() {
+        const query = this.value.toLowerCase().trim();
+
+        items.forEach(item => {
+            // Obtenemos el texto del nombre comercial (h4) y el componente (p)
+            const nombre = item.querySelector('h4').textContent.toLowerCase();
+            const info = item.querySelector('p').textContent.toLowerCase();
+
+            // Si la búsqueda coincide con el nombre o la información adicional
+            if (nombre.includes(query) || info.includes(query)) {
+                item.style.display = 'flex'; // O 'block' según tus estilos originales
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
 </html>
