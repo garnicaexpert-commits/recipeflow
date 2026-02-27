@@ -77,7 +77,12 @@ try {
 </head>
 <body>
   <header class="topbar">
-    <h2>Módulo Vademécum</h2>
+    <div style="display: flex;" >
+    <img src="../imagen/logobig.png" style="width: 80px; height: 80px;">
+    <h2>Módulo de Vademecum</h2>
+    </div>
+    <div>
+    </div>
     <a class="btn-link" href="dashboard.php">Regresar al dashboard</a>
   </header>
 
@@ -128,7 +133,7 @@ try {
               <form method="post" onsubmit="return confirm('¿Eliminar este medicamento?');">
                 <input type="hidden" name="action" value="delete">
                 <input type="hidden" name="id" value="<?= (int)$row['id'] ?>">
-                <button type="submit" class="btn-danger">Eliminar</button>
+                <button type="submit" class="btn-danger">Eliminar</button style="height: 60px;">
               </form>
             </div>
           </article>

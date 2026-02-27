@@ -21,32 +21,32 @@
   --success:#157347;
 }
 
-body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+@media print{
+  @page{size:A4 landscape;margin:5mm}
+  .no-print{display:none !important}
+  body{background:#fff}
+  .container{padding:0}
+  .recipe-col{min-height:180mm;box-shadow:none}
+}
+
 *{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
 body{margin:0;font-family:Inter,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}
-.center{min-height:100vh;display:grid;place-items:center}
-.card{background:var(--surface);border-radius:12px;padding:1rem;box-shadow:0 8px 24px #0f172a14;border:1px solid var(--border)}
-.stack{display:grid;gap:.6rem}
 input,select{padding:.6rem;border:1px solid #cbd5e1;border-radius:8px}
 button,.btn-link{padding:.6rem .9rem;border:0;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;cursor:pointer;display:inline-block}
 button:hover,.btn-link:hover{background:var(--primary-strong)}
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:var(--surface);box-shadow:0 2px 8px #0001;border-bottom:1px solid var(--border)}
-.card{background:var(--surface);border-radius:14px;padding:1rem;box-shadow:0 10px 28px #0f3b4a1a;border:1px solid var(--border)}
-.stack{display:grid;gap:.7rem}
 input,select{padding:.7rem .75rem;border:1px solid #c8d8dd;border-radius:10px;background:#fff;color:var(--text)}
 input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px #2f9e8422}
 button,.btn-link{padding:.62rem 1rem;border:0;background:var(--primary);color:#fff;border-radius:10px;text-decoration:none;cursor:pointer;display:inline-block;font-weight:600;transition:all .2s ease}
 button:hover,.btn-link:hover{background:var(--primary-strong);transform:translateY(-1px)}
+.center{min-height:100vh;display:grid;place-items:center}
+.card{background:var(--surface);border-radius:14px;padding:1rem;box-shadow:0 10px 28px #0f3b4a1a;border:1px solid var(--border)}
+.stack{display:grid;gap:.7rem}
 .topbar{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:var(--surface);box-shadow:0 4px 18px #0000000a;border-bottom:1px solid var(--border)}
 .container{padding:1.2rem 2rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem}
-.msg{color:var(--danger)}
 
-.dashboard-hero{background:linear-gradient(180deg,var(--surface),var(--surface-soft));margin-bottom:1rem}
-.dashboard-hero h1{margin:.1rem 0;font-size:2rem;color:#111827;letter-spacing:.2px}
-.dashboard-hero p{margin:.35rem 0 0;color:var(--muted)}
-.module-card{display:flex;flex-direction:column;gap:.5rem}
+.msg{color:var(--danger)}
 .eyebrow{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--primary);font-weight:700;background:#e8f4f2;border:1px solid #c7e4de;padding:.25rem .55rem;border-radius:999px}
 
 .dashboard-hero{background:linear-gradient(155deg,#ffffff 20%,#eef7f6 100%);margin-bottom:1rem;padding:1.35rem}
@@ -62,7 +62,6 @@ button:hover,.btn-link:hover{background:var(--primary-strong);transform:translat
 .recipe-table th,.recipe-table td{border:1px solid #dbe7eb;padding:.45rem}
 .actions-row{display:flex;gap:.6rem;flex-wrap:wrap}
 .btn-secondary{background:#64748b;color:#fff}
-.btn-secondary{background:#5d7e86;color:#fff}
 .btn-danger{background:var(--danger);color:#fff;border:0;border-radius:8px;padding:.4rem .65rem;cursor:pointer}
 
 .topbar-actions{display:flex;align-items:center;gap:.7rem}
@@ -74,25 +73,17 @@ button:hover,.btn-link:hover{background:var(--primary-strong);transform:translat
 .search-row input{flex:1;min-width:220px}
 .history-list{display:grid; gap:.7rem}
 .history-item{padding:.85rem}
-.history-item{padding:.9rem}
-
 .history-horizontal{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
 .history-content{flex:1;min-width:240px}
 .history-action{display:flex;align-items:center}
 
 .recipe-sheet-two-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.recipe-col{background:#fff;border:1px dashed #444;border-radius:10px;padding:12px;min-height:60vh}
-.recipe-col{background:#fff;border:1px dashed #5d7e86;border-radius:10px;padding:12px;min-height:60vh}
+.recipe-col{background:#fff;border:1px dashed #444;border-radius:10px;padding:12px;min-height:60vh display:;flex: 1}
 .recipe-col h3,.recipe-col h4{margin:.2rem 0 .4rem}
 .recipe-col ul{margin:.2rem 0 0;padding-left:18px}
+.recipe-signature-line { border-top: 1px solid #000; margin: 0 auto 5px auto; width: 70%;}
+.recipe-signature-name { font-weight: bold;font-size: 0.9rem;margin: 0;}
 
-@media print{
-  @page{size:A4 landscape;margin:12mm}
-  .no-print{display:none !important}
-  body{background:#fff}
-  .container{padding:0}
-  .recipe-col{min-height:180mm;box-shadow:none}
-}
 
 .ok{color:var(--success)}
 .actions-row form{margin:0}
@@ -109,30 +100,100 @@ button:hover,.btn-link:hover{background:var(--primary-strong);transform:translat
 .muted{color:var(--muted)}
 
 
-/* Estilos necesarios para el alineamiento */
+/* Contenedor principal para dividir el documento en 2 */
+.document-header {
+    display: flex;
+    justify-content: space-between; /* Separa los dos cuerpos */
+    gap: 40px; /* Espacio entre los dos encabezados */
+    padding: 20px;
+    border-bottom: 1px dashed #ccc; /* Línea de corte opcional */
+}
+
+/* Cada sección individual */
+.header-section {
+    flex: 1; /* Hace que ambos cuerpos midan lo mismo */
+}
+
+/* El bloque que une Logo y Texto */
 .user-profile {
     display: flex;
-    flex-direction: column; /* Apila los bloques uno debajo del otro */
-    gap: 5px;               /* Espacio pequeño entre el nombre y la especialidad */
+    align-items: center; /* Centra verticalmente el logo con el bloque de texto */
+    gap: 15px;           /* Espacio entre logo y texto */
 }
 
-.user-header {
-    display: flex;
-    align-items: center;    /* Centra verticalmente logo y texto */
-    gap: 15px;              /* Espacio entre logo y nombre */
-}
-
-.topbar-logo {
+/* Estilo del Logo */
+.logo {
     width: 80px;
-    height: 80px;
+    height: 80px
     object-fit: contain;
 }
 
-/* Ajustes de margen para que no se vean muy separados */
-.user-header h1, .user-specialty h3 {
-    margin: 0;
+/* Bloque de los 3 párrafos (uno debajo del otro) */
+.user-info-text {
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    justify-content: center;
 }
 
-.user-specialty {
-    padding-left: 95px; /* (Ancho logo 80px + gap 15px) para alinear el texto con el nombre */
+/* Estilos de los textos */
+.user-info-text h1 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.user-info-text h3 {
+    margin: 2px 0;
+    font-size: 14px;
+    color: #007bff; /* Un azul médico profesional */
+    font-weight: 600;
+}
+
+.user-info-text p {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+}
+/* Cada cuerpo de la receta */
+.recipe-col {
+    flex: 1;
+    position: relative; 
+    min-height: 180mm;   /* Altura para A4 landscape */
+    padding: 20px;
+    padding-bottom: 150px; /* Espacio para firma + footer */
+    border: 1px solid #eee;
+    background: white;
+}
+
+/* Contenedor que agrupa firma y footer al fondo */
+.bottom-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.recipe-signature-line {
+    border-top: 1px solid #000;
+    width: 60%;
+    margin: 0 auto 5px;
+}
+
+.recipe-signature-name {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+/* Estilo del Footer (Dirección) */
+.recipe-footer {
+    border-top: 1px solid #cfd8dc;
+    padding-top: 10px;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #546e7a;
 }

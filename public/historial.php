@@ -47,7 +47,7 @@ try {
   <header class="topbar">
     <div style="display: flex;" >
       <img src="../imagen/logobig.png" style="width: 80px; height: 80px;">
-      <h2>Módulo de Recetas</h2>
+      <h2>Historial  de Recetas</h2>
     </div>
     <a class="btn-link" href="dashboard.php">Regresar al Dashboard</a>
   </header>
