@@ -14,7 +14,10 @@ $items = [];
 $error = '';
 $autoPrint = (($_GET['autoprint'] ?? '0') === '1');
 $doctorDisplayName = (string)($_SESSION['user']['display_name'] ?? $_SESSION['user']['full_name'] ?? $_SESSION['user']['username'] ?? 'Profesional de salud');
-$specialty = (string)($_SESSION['user']['specialty'] ?? $_SESSION['user']['full_name'] ?? $_SESSION['user']['username'] ?? 'Profesional de salud');
+$specialty = (string)($_SESSION['user']['specialty'] ?? $_SESSION['user']['full_name'] ?? $_SESSION['user']['username'] ?? 'Medicina General');
+$direction = (string)($_SESSION['user']['direction'] ??  'Sin DIreccion');
+$phone = (string)($_SESSION['user']['contact_phone'] ??  'Sin Telefono de Contacto');
+
 try {
   $pdo = Database::connect($config['db']);
   Database::ensureUsersSchema($pdo);
@@ -28,12 +31,10 @@ try {
   $stmt = $pdo->prepare('SELECT * FROM prescriptions WHERE id = ? AND user_id = ?');
   $stmt->execute([$id, $userId]);
   $recipe = $stmt->fetch();
-
   if ($recipe) {
     $stItems = $pdo->prepare('SELECT medicine_name, quantity, dose, instructions FROM prescription_items WHERE prescription_id = ?');
     $stItems->execute([$id]);
     $items = $stItems->fetchAll();
-
     $vademecumRows = $pdo->query('SELECT nombre_comercial, presentacion FROM vademecum')->fetchAll();
     foreach ($vademecumRows as $row) {
       $key = mb_strtolower(trim((string)($row['nombre_comercial'] ?? '')));
@@ -56,12 +57,7 @@ try {
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>PDF Receta #<?= (int)$id ?></title>
   <link rel="stylesheet" href="assets/styles.css">
-  <style>
-    .recipe-doc-header{display:flex;align-items:center;gap:10px;border-bottom:1px solid #cfd8dc;padding-bottom:8px;margin-bottom:8px}
-    .recipe-doc-logo{width:52px;height:52px;object-fit:contain;flex:0 0 52px}
-    .recipe-doc-title h4{margin:.1rem 0 .2rem;font-size:1rem;line-height:1.2}
-    .recipe-doc-title p{margin:.1rem 0;color:#455a64;font-size:.9rem;line-height:1.25}
-  </style>
+ 
 </head>
 <body>
   <header class="topbar no-print">
@@ -71,7 +67,7 @@ try {
     </div>
     <div class="topbar-actions">
       <a class="btn-link" onclick="window.print()">Imprimir PDF</a>
-      <a class="btn-link" href="historial.php">Regresar al historial</a>
+      <a class="btn-link" href="javascript:void(0);" onclick="cerrarVentana()">Regresar al historial</a>
     </div>
   </header>
 
@@ -110,6 +106,22 @@ try {
               </li>
             <?php endforeach; ?>
           </ul>
+          <div class="bottom-section">
+          <div class="signature-block">
+            <p class="recipe-signature-name">
+                  Firma y Sello: <?= htmlspecialchars($doctorDisplayName) ?>
+            </p>
+          </div>
+          <footer class="recipe-footer">
+            <p>
+              <b>Dirección:</b> <?= htmlspecialchars($direction?? 'Dirección del Consultorio') ?> | 
+              <b>Teléfono:</b> <?= htmlspecialchars($phone ?? 'S/N') ?>
+            </p>
+            <p style="font-size: 0.7rem; margin-top: 4px;">
+                  Generado por Sistema de Control de Recetas Médicas - <?= date('d/m/Y H:i') ?>
+            </p>
+          </footer>
+        </div>
         </article>
         <!-- parte derecha del rececipe -->
         <article class="recipe-col">
@@ -131,24 +143,22 @@ try {
               <li><b><?= htmlspecialchars($it['medicine_name']) ?></b>: <?= htmlspecialchars($it['dose']) ?> <b> Obs:</b> <?= htmlspecialchars($it['instructions']) ?></li>
             <?php endforeach; ?>
           </ul>
-         <div class="bottom-section">
-        <div class="signature-block">
-            <div class="recipe-signature-line"></div>
+        <div class="bottom-section">
+          <div class="signature-block">
             <p class="recipe-signature-name">
-                Firma y Sello: <?= htmlspecialchars($doctorDisplayName) ?>
+                  Firma y Sello: <?= htmlspecialchars($doctorDisplayName) ?>
             </p>
-        </div>
-
-        <footer class="recipe-footer">
+          </div>
+          <footer class="recipe-footer">
             <p>
-                <b>Dirección:</b> <?= htmlspecialchars($recipe['address'] ?? 'Dirección del Consultorio') ?> | 
-                <b>Teléfono:</b> <?= htmlspecialchars($recipe['phone'] ?? 'S/N') ?>
+              <b>Dirección:</b> <?= htmlspecialchars($direction?? 'Dirección del Consultorio') ?> | 
+              <b>Teléfono:</b> <?= htmlspecialchars($phone ?? 'S/N') ?>
             </p>
             <p style="font-size: 0.7rem; margin-top: 4px;">
-                Generado por Sistema de Control de Recetas Médicas - <?= date('d/m/Y H:i') ?>
+                  Generado por Sistema de Control de Recetas Médicas - <?= htmlspecialchars($recipe['created_at']) ?>
             </p>
-        </footer>
-    </div>
+          </footer>
+        </div>
 </article>
       </section>
     <?php endif; ?>
@@ -161,3 +171,16 @@ try {
   <?php endif; ?>
 </body>
 </html>
+
+<script>
+function cerrarVentana() {
+    // Intento estándar de cerrar la pestaña
+    window.close();
+
+    // Si la pestaña no se cierra (porque no fue abierta con window.open), 
+    // redirigimos al historial como plan de respaldo
+    setTimeout(function() {
+        window.location.href = "historial.php";
+    }, 500);
+}
+</script>

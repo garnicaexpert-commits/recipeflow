@@ -62,7 +62,7 @@ button:hover,.btn-link:hover{background:var(--primary-strong);transform:translat
 .recipe-table th,.recipe-table td{border:1px solid #dbe7eb;padding:.45rem}
 .actions-row{display:flex;gap:.6rem;flex-wrap:wrap}
 .btn-secondary{background:#64748b;color:#fff}
-.btn-danger{background:var(--danger);color:#fff;border:0;border-radius:8px;padding:.4rem .65rem;cursor:pointer}
+.btn-danger{background:var(--danger);color:#fff;border:0;border-radius:8px;padding:.4rem .65rem;cursor:pointer height:40px}
 
 .topbar-actions{display:flex;align-items:center;gap:.7rem}
 .module-highlight{margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;gap:.8rem;flex-wrap:wrap}
@@ -83,6 +83,10 @@ button:hover,.btn-link:hover{background:var(--primary-strong);transform:translat
 .recipe-col ul{margin:.2rem 0 0;padding-left:18px}
 .recipe-signature-line { border-top: 1px solid #000; margin: 0 auto 5px auto; width: 70%;}
 .recipe-signature-name { font-weight: bold;font-size: 0.9rem;margin: 0;}
+.recipe-doc-header{display:flex;align-items:center;gap:10px;border-bottom:1px solid #cfd8dc;padding-bottom:8px;margin-bottom:8px}
+.recipe-doc-logo{width:52px;height:52px;object-fit:contain;flex:0 0 52px}
+.recipe-doc-title h4{margin:.1rem 0 .2rem;font-size:1rem;line-height:1.2}
+.recipe-doc-title p{margin:.1rem 0;color:#455a64;font-size:.9rem;line-height:1.25}
 
 
 .ok{color:var(--success)}
@@ -91,8 +95,6 @@ button:hover,.btn-link:hover{background:var(--primary-strong);transform:translat
 
 .login-shell{background:radial-gradient(circle at top,#eef2f7 0%,var(--bg) 45%,var(--bg) 100%)}
 .login-card{width:min(420px,92vw);padding:1.4rem}
-.login-shell{background:radial-gradient(circle at top,#e8f4f2 0%,#eef6f8 45%,var(--bg) 100%)}
-.login-card{width:min(560px,92vw);padding:1.6rem}
 .login-brand{margin-bottom:1rem}
 .login-brand h1{margin:0;color:#111827;font-size:2rem;letter-spacing:.2px}
 .login-brand h1{margin:.45rem 0 .2rem;color:#12323a;font-size:2rem;line-height:1.2;letter-spacing:.1px}

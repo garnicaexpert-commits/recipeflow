@@ -13,7 +13,7 @@ try {
   $pdo = Database::connect($config['db']);
   Database::ensureUsersSchema($pdo);
 
-  $stmt = $pdo->prepare('SELECT id, username, password_hash, full_name, display_name, specialty, access_level FROM users WHERE username = ?');
+  $stmt = $pdo->prepare('SELECT id, username, password_hash, full_name, display_name, specialty, access_level, direction, correo, contact_phone FROM users WHERE username = ?');
   $stmt->execute([$username]);
   $user = $stmt->fetch();
 
@@ -30,6 +30,9 @@ try {
     'specialty' => $user['specialty'],
     'display_name' => $user['display_name'] ?: $user['full_name'],
     'access_level' => $user['access_level'] ?: 'usuario',
+    'direction' => $user['direction'],
+    'correo' => $user['correo'],
+    'contact_phone'=> $user['contact_phone'],
   ];
 
   echo json_encode(['ok' => true]);

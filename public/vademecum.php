@@ -125,8 +125,8 @@ try {
           <article class="card history-item history-horizontal">
             <div class="history-content">
               <h4><?= htmlspecialchars($row['nombre_comercial']) ?></h4>
-              <p><b>Componente:</b> <?= htmlspecialchars($row['componente_quimico']) ?></p>
-              <p><b>Dosis:</b> <?= htmlspecialchars($row['dosis']) ?> | <b>Presentación:</b> <?= htmlspecialchars($row['presentacion']) ?></p>
+              <p><b>Componente:</b> <?= htmlspecialchars($row['componente_quimico']) ?> |
+              <b>Dosis:</b> <?= htmlspecialchars($row['dosis']) ?> | <b>Presentación:</b> <?= htmlspecialchars($row['presentacion']) ?></p>
             </div>
             <div class="actions-row">
               <a class="btn-link" href="vademecum.php?edit=<?= (int)$row['id'] ?>">Editar</a>

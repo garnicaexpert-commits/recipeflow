@@ -12,7 +12,7 @@ if (form) {
     };
 
     try {
-      const res = await fetch('login.php', {
+      const res = await fetch('../public/login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

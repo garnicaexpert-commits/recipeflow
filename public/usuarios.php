@@ -29,7 +29,7 @@ try {
     if ($action === 'create') {
       $password = trim($_POST['password'] ?? '');
       if ($password === '') $password = '123456';
-      $stmt = $pdo->prepare('INSERT INTO users (username, password_hash, full_name, display_name, specialty, contact_phone, access_level) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO users (username, password_hash, full_name, display_name, specialty, contact_phone, direction, correo, access_level) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
       $stmt->execute([
         trim($_POST['username'] ?? ''),
         password_hash($password, PASSWORD_BCRYPT),
@@ -37,6 +37,8 @@ try {
         trim($_POST['display_name'] ?? ''),
         trim($_POST['specialty'] ?? ''),
         trim($_POST['contact_phone'] ?? ''),
+        trim($_POST['direction'] ?? ''),
+        trim($_POST['correo'] ?? ''),
         in_array($_POST['access_level'] ?? 'usuario', ['usuario', 'superusuario'], true) ? $_POST['access_level'] : 'usuario',
       ]);
       $msg = 'Usuario creado correctamente.';
@@ -44,13 +46,15 @@ try {
 
     if ($action === 'update') {
       $id = (int)($_POST['id'] ?? 0);
-      $stmt = $pdo->prepare('UPDATE users SET username=?, full_name=?, display_name=?, specialty=?, contact_phone=?, access_level=? WHERE id=?');
+      $stmt = $pdo->prepare('UPDATE users SET username=?, full_name=?, display_name=?, specialty=?, contact_phone=?, direction=?, correo=?, access_level=? WHERE id=?');
       $stmt->execute([
         trim($_POST['username'] ?? ''),
         trim($_POST['full_name'] ?? ''),
         trim($_POST['display_name'] ?? ''),
         trim($_POST['specialty'] ?? ''),
         trim($_POST['contact_phone'] ?? ''),
+        trim($_POST['direction'] ?? ''),
+        trim($_POST['correo'] ?? ''),
         in_array($_POST['access_level'] ?? 'usuario', ['usuario', 'superusuario'], true) ? $_POST['access_level'] : 'usuario',
         $id,
       ]);
@@ -115,7 +119,8 @@ try {
         <input name="display_name" placeholder="Nombre a mostrar" required value="<?= htmlspecialchars($editRow['display_name'] ?? '') ?>">
         <input name="specialty" placeholder="Especialidad" required value="<?= htmlspecialchars($editRow['specialty'] ?? '') ?>">
         <input name="contact_phone" placeholder="Teléfono de contacto" required value="<?= htmlspecialchars($editRow['contact_phone'] ?? '') ?>">
-
+        <input name="direction" placeholder="Direccion de Domicilio" required value="<?= htmlspecialchars($editRow['direction'] ?? '') ?>">
+        <input name="correo" placeholder="Correo de Contacto" required value="<?= htmlspecialchars($editRow['correo'] ?? '') ?>">
         <select name="access_level" required>
           <?php $level = $editRow['access_level'] ?? 'usuario'; ?>
           <option value="usuario" <?= $level === 'usuario' ? 'selected' : '' ?>>Usuario</option>
